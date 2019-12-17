@@ -1,0 +1,228 @@
+<html>
+    <head>
+        <title>Privilege Management</title>
+        <style>
+            body{
+                margin-left: 10%;
+                margin-right:10%;
+            }
+            h1{
+                padding-bottom:10px;
+                border-bottom-style: solid;
+            }
+            form label{
+                width: 100px;
+            }
+
+            button{
+                color: white;
+                background-color: red;
+                border-style:solid;
+                padding: 10px;
+                border-radius: 10px;                
+                transition: 1s;                
+            }
+
+            button:hover{
+                color: red;
+                background: white;
+                border-color: red;
+                transition: 0.5s;
+            }
+            button:active{
+                color: white;
+                background: black;
+                border-color: white;
+                transition: 0.1s;
+            }
+
+
+
+            .button-all{
+                color: rgb(255, 255, 255); 
+                background-color: rgb(56, 56, 56);   
+                font-weight: bold;       
+            }
+
+            .button-all:hover{
+                color: rgb(255, 255, 255); 
+                background-color: rgb(32, 32, 32); 
+                border-color: rgb(56, 56, 56);   
+            }
+            .button-all:active{
+                color:rgb(32, 32, 32); 
+                background-color:   rgb(255, 255, 255); 
+                border-color:rgb(32, 32, 32); 
+            }
+
+            .management-box{
+                position: relative;
+                width:225px;
+                float: left;
+                margin-right: 15%;
+                padding-left: 20px;
+                height: 1000px;
+                margin-bottom: 50px;
+                border-top-left-radius:25px;
+            }
+            .management-box:hover, .management-box:focus-within{
+                background: #ecebeb;
+                transition: 2s;
+                box-shadow: 5px 5px;
+            
+            }
+        </style>
+    </head>
+    <body>
+        <h1>System-User Management</h1>
+        <div>
+            <div  class='management-box'>
+                <h2>Buyers Management</h2>
+                <form>
+                    <button type='submit' class='button-all'>view all buyers</button>
+                </form>
+                <form>
+                    <h3>Search Buyers</h3>
+                    <label for:'name'>Username: </label>
+                    <br>
+                    <input type="text" name='name'>
+                    <br>
+                    <br>
+                    <button type='submit'>search buyer</button>
+                </form>
+                <form>
+                    <h3>Add Buyers</h3>
+                    <label for:'name'>Username: </label>
+                    <br>
+                    <input type="text" name='name'>
+                    <br>
+                    <label for:'psw'>Password: </label>
+                    <br>
+                    <input type="password" name='psw'>
+                    <br>
+                    <br>
+                    <button type='submit'>Add buyer</button>
+                </form>
+                <form>
+                    <h3>Update Buyers</h3>
+                    <label for:'cur-name'>Current Username: </label>
+                    <br>
+                    <input type="text" name='cur-name'>
+                    <br>
+                    <label for:'cur-psw'>Current Password: </label>
+                    <br>
+                    <input type="password" name='cur-psw'>
+                    <br>
+                    <label for:'new-name'>New Username: </label>
+                    <br>
+                    <input type="text" name='new-name'>
+                    <br>
+                    <label for:'new-psw'>New Password: </label>
+                    <br>
+                    <input type="password" name='new-psw'>
+                    <br>
+                    <br>
+                    <button type='submit'>Change</button>
+                </form>
+            </div>
+            <div class='management-box'>
+                <h2>Seller Management</h2>
+                <form>
+                    <button type='submit' class='button-all'>View all sellers</button>
+                </form>
+                <form>
+                    <h3>Search Sellers</h3>
+                    <label for:'name'>Seller: </label>
+                    <br>
+                    <input type="text" name='name'>
+                    <br>
+                    <br>
+                    <button type='submit'>search buyer</button>
+                </form>
+                <form>
+                    <h3>Add Seller</h3>
+                    <label for:'name'>Username: </label>
+                    <br>
+                    <input type="text" name='name'>
+                    <br>
+                    <label for:'psw'>Password: </label>
+                    <br>
+                    <input type="password" name='psw'>
+                    <br>
+                    <label for:'product'>Product: </label>
+                    <br>
+                    <input type='text' name='product'>
+                    <br>
+                    <br>
+                    <button type='submit'>Add Seller</button>
+                </form>
+                <form>
+                    <h3>Update Sellers</h3>
+                    <label for:'cur-name'>Current Username: </label>
+                    <br>
+                    <input type="text" name='cur-name'>
+                    <br>
+                    <label for:'cur-psw'>Current Password: </label>
+                    <br>
+                    <input type="password" name='cur-psw'>
+                    <br>
+                    <label for:'new-name'>New Username: </label>
+                    <br>
+                    <input type="text" name='new-name'>
+                    <br>
+                    <label for:'new-psw'>New Password: </label>
+                    <br>
+                    <input type="password" name='new-psw'>
+                    <br>
+                    <br>
+                    <button type='submit'>Change</button>
+                </form>
+                <form>
+                    <h3>Add Product</h3>                        
+                    <label for:'cur-name'>Seller: </label>
+                    <br>
+                    <input type="text" name='cur-name'>
+                    <br>
+                    <label for:'name'>Product Name: </label>
+                    <br>
+                    <input type="text" name='name'>
+                    <br>
+                    <br>
+                    <button type='submit'>Add Product</button>
+                </form>
+            </div>
+            <div class='management-box'>
+                <h2>Admin Management</h2>
+                <form>
+                    <button type='submit' class='button-all'>View all admins</button>
+                </form>
+                <form>
+                    <h3>Search Admin</h3>
+                    <label for:'name'>Admin: </label>
+                    <br>
+                    <input type="text" name='name'>
+                    <br>
+                    <br>
+                    <button type='submit'>search admin</button>
+                </form>
+                <form>
+                    <h3>Add Admin</h3>
+                    <label for:'name'>Username: </label>
+                    <br>
+                    <input type="text" name='name'>
+                    <br>
+                    <label for:'psw'>Password: </label>
+                    <br>
+                    <input type="password" name='psw'>
+                    <br>
+                    <label for:'product'>Product: </label>
+                    <br>
+                    <input type='text' name='product'>
+                    <br>
+                    <br>
+                    <button type='submit'>Add Admin</button>
+                </form>
+            </div>                
+        </div>
+    </body>
+</html>
