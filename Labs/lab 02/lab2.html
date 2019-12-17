@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<style type="text/css">
+		.cal{
+			background: grey;
+		}
+		.screen{
+			height: 40px;
+			background: white;
+			text-align: right;
+			padding-right: 10px;
+		}
+
+		.button{
+			padding:5px;
+			width: 30px;
+			background: white;
+		}
+
+		.button:hover{
+			background: #f5f5f5;
+		}
+
+		.button:active{
+			background: #a5a5a5;
+		}
+	</style>
+</head>
+<body>
+	<table class='cal'>
+		<tr>
+			<td id='screen' class='screen' colspan='5'></td>
+		</tr>
+		<tr>
+			<td id='MC' class='button' onclick="mc()">MC</td>
+			<td id='0' class='button' onclick="num(0)">0</td>
+			<td id='1' class='button' onclick="num(1)">1</td>
+			<td id='2' class='button' onclick="num(2)">2</td>
+			<td id='add' class='button' onclick="op('+')" >+</td>
+		</tr>
+		<tr>
+			<td id='MS' class='button' onclick="ms()">MS</td>
+			<td id='3' class='button' onclick="num(3)">3</td>
+			<td id='4' class='button' onclick="num(4)">4</td>
+			<td id='5' class='button' onclick="num(5)">5</td>
+			<td id='sub' class='button' onclick="op('-')">-</td>
+		</tr>
+		<tr>
+			<td id='MR' class='button' onclick="mr()">MR</td>
+			<td id='6' class='button' onclick="num(6)">6</td>
+			<td id='7' class='button' onclick="num(7)">7</td>
+			<td id='8' class='button' onclick="num(8)">8</td>
+			<td id='mul' class='button' onclick="op('*')">*</td>
+		</tr>
+		<tr>
+			<td id='MPlus' class='button' onclick="mp()">M+</td>
+			<td id='9' class='button' onclick="num(9)">9</td>
+			<td id='sign' class='button' onclick="sign()">+/-</td>
+			<td id='equal' class='button' onclick="equal()">=</td>
+			<td id='divi' class='button' onclick="op('/')">/</td>
+		</tr>
+		<tr>
+			<td id='rec' class='button' onclick="rep()">1/x</td>
+			<td id='dot' class='button' onclick="fdot()">.</td>
+			<td id='sq' class='button' onclick='sq()'>x2</td>
+			<td id='sqr' class='button' onclick='sqr()'>^1/2</td>
+			<td id='init' class='button' onclick='c()'>C</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		screen = document.getElementById("screen");
+
+		var output = '';
+		var cache1 = 0;
+		var cache2 = 0;
+		finput = false;
+		res = false;
+		dot = false;
+		opt = '';
+		dec = 1;
+		opt_prev ='';
+		m = 0;
+		s = false;
+
+		display();
+
+		function c(){
+			output = '';	
+			cache1 = 0;
+			cache2 = 0;
+			finput = false;
+			res = false;
+			dec = 1;
+			display();
+			opt_prev ='';
+			dot = false;
+			s = false;
+		}
+
+		function display(){
+			if(output == ''){
+				screen.innerHTML = 0;
+			}else{				
+				screen.innerHTML = output;
+			}
+		}
+
+		function num(value){
+			output = output + value;
+			if (finput	== false){
+				if(!dot){
+					if(!s){
+						cache1 = 10 * cache1 + value;
+					}else{
+						cache1 = 10 * cache1 - value
+					}
+					
+				}else{
+					cache1 = cache1 + value / (10 ** dec);
+					dec++;
+				}
+				console.log("cache1 = " + cache1)
+				display();
+			}else{
+				if(!dot){
+					cache2 = 10 * cache2 + value;
+				}else{
+					cache2 = cache2 + value / (10 ** dec);
+					dec++;
+				}
+				//cache2 = 10 * cache2 + value;
+				console.log("cache1 = " + cache1 + "\ncache2 = " + cache2)
+				display();
+			}
+		}
+
+		function op(opt){
+			output = output + opt;
+			if(finput == false){
+				opt_prev = opt;
+				finput = true;				
+				console.log(cache1, opt);
+				dec = 1;
+			}else{
+				cache1 = opAction(opt_prev);
+				cache2 = 0;
+				opt_prev = opt;
+			}			
+			display();
+
+			dotReset();
+			
+		}
+
+		function opAction(opt){
+			switch(opt){
+				case '+': return cache1 + cache2;
+				case '-': return cache1 - cache2; 
+				case '/': return cache1 / cache2; 
+				case '*': return cache1 * cache2; 
+			}
+
+			dotReset();
+		}
+
+		function equal(){
+			output = eval(output);
+			//c();
+			display();
+		}
+
+		function rep(){
+			if(!finput){
+				cache1 = 1 / cache1;
+				output = '' + cache1;
+				display();
+			}else{
+				cache1 = 1 / opAction(opt_prev);
+				cache2 = 0;				
+				output = '' + cache1;
+				display();
+				opt_prev = '';
+				finput = false;
+
+			}
+r
+			dotReset();
+		}
+
+		function sq(){
+			if(!finput){
+				cache1 = cache1 ** 2;
+				output = '' + cache1;
+				display();
+			}else{
+				cache1 = opAction(opt_prev) ** 2;
+				cache2 = 0;				
+				output = '' + cache1;
+				display();
+				opt_prev = '';
+				finput = false;
+
+			}
+
+			dotReset();
+		}
+
+		function sqr(){
+			if(!finput){
+				cache1 = cache1 ** (1/2);
+				output = '' + cache1;
+				display();
+			}else{
+				cache1 = opAction(opt_prev) ** (1/2);
+				cache2 = 0;				
+				output = '' + cache1;
+				display();
+				opt_prev = '';
+				finput = false;
+
+			}
+
+			dotReset();
+		}
+
+		function fdot(){
+			output = output	+ '.';
+			display();
+			dot=true;
+		}
+
+		function dotReset(){
+			dot = false;
+			dec = 1;
+		}
+
+		function mc(){
+			m = 0;
+		}
+
+		function ms(){
+			if(parseInt(output) == output){
+				m = parseInt(output);
+			}
+			console.log(m)
+		}
+
+		function mr(){
+			console.log(m.toString().length)
+			if(!finput){
+				cache1 = cache1 * (10 ** (m.toString().length)) + m;
+			}else{
+				cache2 = cache2 * (10 ** (m.toString().length)) + m;
+			}
+			output = output + m;
+			display();
+		}
+
+		function mp(){
+			if(parseInt(output) == output){
+				m += parseInt(output);
+			}
+		}
+
+		function sign(){
+			if(!finput){
+				cache1 *= -1;
+				output = '' + cache1;
+				display();
+				s = true;
+			}else{
+				output = output + "*-1";
+				display();
+			}
+		}
+
+	</script>
+</body>
+</html>
